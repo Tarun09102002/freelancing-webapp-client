@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
     "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
     "emoji-picker-react": "^3.5.1",
     "font-awesome": "^4.7.0",
     "framer-motion": "^6.2.8",
@@ -26,6 +27,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropdown-select": "^4.8.4",
+    "react-file-base64": "^1.0.3",
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^7.29.0",
@@ -40,6 +42,7 @@
     "scss": "^0.2.4",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",
+    "styled-components": "^5.3.5",
     "swiper": "^8.0.7",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
