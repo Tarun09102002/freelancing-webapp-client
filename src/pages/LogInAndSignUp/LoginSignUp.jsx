@@ -168,6 +168,7 @@ const LoginSignUp = (props) => {
           localStorage.setItem("loggedIn", true);
           localStorage.setItem("isDataTaken", response.data.userDataTaken);
           const newSocket = io(`${server_url}`);
+          alert(newSocket);
           dispatch(setSocket(newSocket));
           if (response.data.chatNotifications) {
             dispatch(setNewMessage({ offlineChatNotifications: true }));
