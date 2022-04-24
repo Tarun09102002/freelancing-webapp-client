@@ -33,7 +33,7 @@ const FindWork = (props) => {
   const numberOfBids = ["All", "0-10", "10-30", "30- 60", "60-100", ">100"];
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/findwork/${state.category}`)
+      .get(`https://freelancing-webapp-server.herokuapp.com/findwork/${state.category}`)
       .then(function (response) {
         if (works === undefined) {
           // setworks(response.data.items);

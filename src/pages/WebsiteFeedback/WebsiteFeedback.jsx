@@ -74,7 +74,7 @@ const WebsiteFeedback = () => {
     }
 
     axios
-      .post("http://localhost:8080/websitefeedback", {
+      .post("https://freelancing-webapp-server.herokuapp.com/websitefeedback", {
         data: {
           ...websiteFeedback,
           username: localStorage.getItem("username"),
@@ -114,7 +114,7 @@ const WebsiteFeedback = () => {
           !someData.votedUsers.includes(localStorage.getItem("username"))
         ) {
           voteNoted = true;
-          axios.post("http://localhost:8080/updatewebsitefeedbackvotes", {
+          axios.post("https://freelancing-webapp-server.herokuapp.com/updatewebsitefeedbackvotes", {
             title: data.title,
             desc: data.desc,
             username: localStorage.getItem("username"),
