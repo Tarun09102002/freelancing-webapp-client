@@ -4,7 +4,7 @@ import { Footer, LimitCharHoverReveal, Navbar } from "../../components/import";
 import "./AllWorks.scss";
 import axios from "axios";
 import LoadingSpinner from "../Chat/LoadingSpinner";
-const server_url = process.env.server_url;
+const server_url = process.env.REACT_APP_server_url;
 
 const AllWorks = (props) => {
   const { state } = useLocation();

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { FullScreenLoader, Navbar } from "../../components/import";
 import "./WebsiteFeedback.scss";
-const server_url = process.env.server_url;
+const server_url = process.env.REACT_APP_server_url;
 
 toast.configure();
 
