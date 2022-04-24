@@ -175,6 +175,7 @@ function GLogin(props) {
       position: "top-center",
     });
   };
+  console.log(process.env.client_id)
   return (
     <div className="glogin">
       <GoogleLogin
