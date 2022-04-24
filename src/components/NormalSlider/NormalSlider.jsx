@@ -18,7 +18,7 @@ const NormalSlider = (props) => {
   const [items, setItems] = useState();
 
   useEffect(() => {
-    axios.get(`https://freelancing-webapp-server.herokuapp.com/${props.type}`).then(function (response) {
+    axios.get(`http://localhost:8080/${props.type}`).then(function (response) {
       setItems(response.data.items);
       setLoading(false);
     });

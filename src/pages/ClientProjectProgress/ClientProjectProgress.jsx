@@ -3,7 +3,6 @@ import { Navbar } from "../../components/import";
 import "./ClientProjectProgress.scss";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
-const server_url = process.env.REACT_APP_server_url;
 
 const ClientProjectProgress = () => {
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ const ClientProjectProgress = () => {
 
   useEffect(() => {
     axios
-      .get(`${server_url}/getImage/${workData.freelancer}`)
+      .get(`http://localhost:8080/getImage/${workData.freelancer}`)
       .then((response) => {
         setFreelancerImage(response.data.image);
       });

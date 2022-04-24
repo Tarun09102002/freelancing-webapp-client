@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../FindWork/LoadingSpinner";
 import { toast } from "react-toastify";
-const server_url = process.env.REACT_APP_server_url;
 toast.configure();
 
 const ClientDashboard = () => {
@@ -33,7 +32,7 @@ const ClientDashboard = () => {
   useEffect(() => {
     //here get wasnt working with passing object so used post,
     axios
-      .post(`${server_url}/findwork/bid/${work._id}`)
+      .post(`http://localhost:8080/findwork/bid/${work._id}`)
       .then(function (response) {
         setComments(response.data.items);
         setOtherBids(response.data.bids);
@@ -67,7 +66,7 @@ const ClientDashboard = () => {
     setNewComment("");
 
     axios
-      .post(`${server_url}/findwork/bid/newComment`, object)
+      .post("http://localhost:8080/findwork/bid/newComment", object)
       .then((response) => {
         if (response.data.result === 4) {
           setComments((comments) => {
@@ -92,7 +91,7 @@ const ClientDashboard = () => {
     const userAns = prompt("are u sure ?(yes/no)");
     if (userAns.toLowerCase() === "yes") {
       axios
-        .post(`${server_url}/acceptbid`, {
+        .post("http://localhost:8080/acceptbid", {
           workId: work._id,
           title: work.title,
           freelancer: username,

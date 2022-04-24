@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import { Footer, LimitCharHoverReveal, Navbar } from "../../components/import";
+import { Footer, FullScreenLoader, LimitCharHoverReveal, Navbar } from "../../components/import";
 import "./AllWorks.scss";
 import axios from "axios";
-import LoadingSpinner from "../Chat/LoadingSpinner";
-const server_url = process.env.REACT_APP_server_url;
 
 const AllWorks = (props) => {
   const { state } = useLocation();
@@ -13,7 +11,7 @@ const AllWorks = (props) => {
     if ("username" in state) {
       axios
         .get(
-          `${server_url}/userprofile/allwork/${localStorage.getItem(
+          `http://localhost:8080/userprofile/allwork/${localStorage.getItem(
             "username"
           )}`
         )
@@ -27,12 +25,13 @@ const AllWorks = (props) => {
   }, []);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <FullScreenLoader />;
   }
   return (
     <>
-      <Navbar />
+    <Navbar />
       <div className="all-works-base-container">
+        
         <div className="all-works-container">
           <h1>All Posts</h1>
           <div className="work-cards">
@@ -59,6 +58,7 @@ const AllWorks = (props) => {
               })}
           </div>
         </div>
+        
       </div>
       <Footer className="footer" />
     </>

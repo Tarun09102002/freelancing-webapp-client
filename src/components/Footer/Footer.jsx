@@ -9,14 +9,13 @@ import {
   setFooterData,
 } from "../../features/Footer/footerSlice";
 import "./footer.scss";
-const server_url = process.env.REACT_APP_server_url;
 
 const Footer = () => {
   const footerData = useSelector(selectFooterData);
   const dispatch = useDispatch();
   useEffect(() => {
     if (footerData.jobsPosted === null) {
-      axios.get(`${server_url}/getFooterData`).then((res) => {
+      axios.get(`http://localhost:8080/getFooterData`).then((res) => {
         dispatch(
           setFooterData({
             ...footerData,

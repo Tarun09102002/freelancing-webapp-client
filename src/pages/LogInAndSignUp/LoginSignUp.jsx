@@ -19,7 +19,6 @@ import { setNewComment } from "../../features/socket/newCommentSlice";
 import { setBidAccepted } from "../../features/socket/bidAcceptedSlice";
 import { setFeedback } from "../../features/socket/feedbackSlice";
 toast.configure();
-const server_url = process.env.REACT_APP_server_url;
 
 const axios = require("axios").default;
 
@@ -151,7 +150,7 @@ const LoginSignUp = (props) => {
     }
     setLoading(true);
     axios
-      .post(`${server_url}/${context.toLowerCase()}`, {
+      .post(`http://localhost:8080/${context.toLowerCase()}`, {
         username: username1,
         password: password1,
       })
@@ -167,8 +166,7 @@ const LoginSignUp = (props) => {
           localStorage.setItem("username", username1);
           localStorage.setItem("loggedIn", true);
           localStorage.setItem("isDataTaken", response.data.userDataTaken);
-          const newSocket = io(`${server_url}`);
-          alert(newSocket);
+          const newSocket = io("http://localhost:8080");
           dispatch(setSocket(newSocket));
           if (response.data.chatNotifications) {
             dispatch(setNewMessage({ offlineChatNotifications: true }));
@@ -188,9 +186,6 @@ const LoginSignUp = (props) => {
             dispatch(setNewComment(commentNotifications[i]));
           }
           for (let i = 0; i < feedbackNotifications.length; i++) {
-            console.log("feedback notifications");
-            console.log("feedbackNotifications[i]");
-            console.log(feedbackNotifications[i]);
             dispatch(setFeedback(feedbackNotifications[i]));
           }
           try {

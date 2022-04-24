@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import Multiselect from "multiselect-react-dropdown";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
-const server_url = process.env.REACT_APP_server_url;
 
 const skills = [
   { Skill: "HTML" },
@@ -26,6 +25,48 @@ const skills = [
   { Skill: "SCSS" },
   { Skill: "VueJs" },
 ];
+
+const categoryAndSkills = [
+  {
+    Category: "Designer",
+    skills: ["Branding", "Coding", "Illustrator", "Blender"],
+  },
+  {
+    Category: "Frontend Web Developer",
+    skills: ["HTML", "CSS", "JavaScript", "ReactJs", "VueJS"],
+  },
+  {
+    Category: "Backend Web Developer",
+    skills: ["NodeJS", "PHP", "SQL", "MongoDB", "Django"],
+  },
+  {
+    Category: "App Developer",
+    skills: ["Flutter", "Dart", "Android", "IOS", "Java"],
+  },
+  {
+    Category: "UI/UX Designer",
+    skills: ["Adobe photoshop", "Illustrator", "Figma", "CSS", "SEO"],
+  },
+  { Category: "Cyber Security", skills: ["kali linux", "nmap", "Blockchain"] },
+  {
+    Category: "Logo Creator",
+    skills: ["Adobe Photoshop", "Illustrator", "Figma", "Canva"],
+  },
+  {
+    Category: "Video Editor",
+    skills: ["Adobe after effect", "Filmora", "Vimeo"],
+  },
+  {
+    Category: "Models",
+    skills: [
+      "Good Physique",
+      "No problem with camera",
+      "Smiling face",
+      "Communication",
+    ],
+  },
+];
+
 const category = [
   { Category: "Designer" },
   { Category: "Frontend Developer" },
@@ -254,15 +295,6 @@ const LinearStepper = (props) => {
         />
       </>
     );
-
-    // switch (step) {
-    //   case 0:
-    //     return <BasicForm />;
-    //   case 1:
-    //     return <Profile />;
-    //   default:
-    //     return "unknown step";
-    // }
   };
   const classes = useStyles();
   const methods = useForm({
@@ -349,10 +381,10 @@ const LinearStepper = (props) => {
         return;
       }
       axios
-        .post(`${server_url}/userprofileinput`, {
+        .post("http://localhost:8080/userprofileinput", {
           userData: getUserData,
         })
-        .then((res) => { })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });

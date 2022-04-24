@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../FindWork/LoadingSpinner";
 import { toast } from "react-toastify";
-const server_url = process.env.REACT_APP_server_url;
 
 const Bid = () => {
   let navigate = useNavigate();
@@ -51,7 +50,7 @@ const Bid = () => {
     }
 
     axios
-      .post(`${server_url}/findwork/bid/${id}`, {
+      .post(`http://localhost:8080/findwork/bid/${id}`, {
         id: id,
         needWorkData: needWorkData,
       })
@@ -118,7 +117,7 @@ const Bid = () => {
     setNewComment("");
 
     axios
-      .post(`${server_url}/findwork/bid/newComment`, object)
+      .post("http://localhost:8080/findwork/bid/newComment", object)
       .then((response) => {
         if (response.data.result === 4) {
           setComments((comments) => {
@@ -178,7 +177,7 @@ const Bid = () => {
     };
     setLoading(true);
     axios
-      .post(`${server_url}/findwork/bid/newBid`, object)
+      .post("http://localhost:8080/findwork/bid/newBid", object)
       .then((response) => {
         setLoading(false);
         if (response.data.result === 4) {

@@ -5,7 +5,6 @@ import "./PostTalent.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-const server_url = process.env.REACT_APP_server_url;
 
 toast.configure();
 
@@ -26,7 +25,7 @@ const PostTalent = () => {
 
   useEffect(() => {
     axios
-      .get(`${server_url}/findtalent/postwork`)
+      .get(`http://localhost:8080/findtalent/postwork`)
       .then(function (response) {
         setOriginalData(response.data.filterData);
         let category = [];
@@ -183,7 +182,7 @@ const PostTalent = () => {
       username: localStorage.getItem("username"),
     };
     axios
-      .post(`${server_url}/findwork/posttalent`, {
+      .post(`http://localhost:8080/findwork/posttalent`, {
         postTalentData: data,
       })
       .then((response) => {
@@ -228,9 +227,9 @@ const PostTalent = () => {
             onChange={onDataChange}
           />
         </div>
-        <div className="dragDrop">
+        {/* <div className="dragDrop">
           <h1>{"{Select Files}"}</h1>
-        </div>
+        </div> */}
         {/* <div className = "category-select">
           <h1>Select a category</h1>
           <Select

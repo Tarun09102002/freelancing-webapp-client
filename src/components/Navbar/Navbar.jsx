@@ -98,30 +98,34 @@ const SearchAndLinks = (props) => {
     dropdownRecommend.classList.remove("active");
     for (let item of dropdownRecommendItems) {
       if (
-        item.innerText.includes(searchInput.value) &&
+        item.innerText
+          .toLowerCase()
+          .includes(searchInput.value.toLowerCase()) &&
         !item.classList.contains("active")
       )
         item.classList.add("active");
       else if (
-        !item.innerText.includes(searchInput.value) &&
+        !item.innerText
+          .toLowerCase()
+          .includes(searchInput.value.toLowerCase()) &&
         item.classList.contains("active")
       )
         item.classList.remove("active");
     }
   };
 
-  const handleSearchInput = (e) => {
+  const handleSearchInputDropdown = (e) => {
     const dropdownRecommendItems = document.querySelector(
       ".dropdown-recommend .recommend-items"
     ).children;
     for (let item of dropdownRecommendItems) {
       if (
-        item.innerText.includes(e.target.value) &&
+        item.innerText.toLowerCase().includes(e.target.value.toLowerCase()) &&
         !item.classList.contains("active")
       )
         item.classList.add("active");
       else if (
-        !item.innerText.includes(e.target.value) &&
+        !item.innerText.toLowerCase().includes(e.target.value.toLowerCase()) &&
         item.classList.contains("active")
       )
         item.classList.remove("active");
@@ -130,22 +134,48 @@ const SearchAndLinks = (props) => {
 
   const handleEnterOnSearch = (e) => {
     const searchInput = document.querySelector(".search-container input");
+    console.log();
     if (e.key === "Enter") {
-      if (searchInput.placeholder === "Find Talent") {
-        navigate("/findtalent/category", {
-          state: {
-            category: searchInput.value.replace(/ /g, "").toLowerCase(),
-          },
-        });
-      } else if (searchInput.placeholder === "Find Work") {
-        navigate("/findwork/category", {
-          state: {
-            category: searchInput.value.replace(/ /g, "").toLowerCase(),
-          },
-        });
-      }
+      handleSearchInput();
+    } else if(searchInput.placeholder!="Search here..."){
+      const searchInput = document.querySelector(".search-container input");
+      const dropdownRecommend = document.querySelector(".dropdown-recommend");
+      const dropdownCategory = document.querySelector(".dropdown-select");
+      if (dropdownCategory.classList.contains("active"))
+        dropdownCategory.classList.remove("active");
+      dropdownRecommend.classList.add("active");
     }
   };
+
+  const handleSearchInput = () => {
+    const searchInput = document.querySelector(".search-container input");
+    if (searchInput.placeholder === "Find Talent") {
+      console.log(searchInput.value.replace(/[ /]/g, "").toLowerCase());
+      navigate("/findtalent/category", {
+        state: {
+          category: searchInput.value.replace(/[ /]/g, "").toLowerCase(),
+        },
+      });
+    } else if (searchInput.placeholder === "Find Work") {
+      navigate("/findwork/category", {
+        state: {
+          category: searchInput.value.replace(/[ /]/g, "").toLowerCase(),
+        },
+      });
+    }
+  };
+
+  const recommendDropdown = [
+    "Frontend Web developer",
+    "Designer",
+    "App developer",
+    "Model",
+    "Cyber Security",
+    "UI/UX Designer",
+    "Logo Creator",
+    "Video Editor",
+    "Backend Web developer",
+  ];
 
   return (
     <>
@@ -158,10 +188,10 @@ const SearchAndLinks = (props) => {
           type="text"
           placeholder="Search here..."
           onKeyDown={(e) => handleEnterOnSearch(e)}
-          onChange={(e) => handleSearchInput(e)}
+          onChange={(e) => handleSearchInputDropdown(e)}
         />
         <i className="bx bxs-chevron-down down"></i>
-        <Search className="i" />
+        <Search className="i" onClick={(e) => handleSearchInput(e)} />
         <div className="dropdown-select ">
           <div className="dropdown-item" onClick={(e) => searchItemClick(e)}>
             <div className="item-left">
@@ -193,60 +223,17 @@ const SearchAndLinks = (props) => {
         </div>
         <div className="dropdown-recommend ">
           <div className="recommend-items">
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Frontend Web developer
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Designer
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              App developer
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Model
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Cyber Security
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              UI/UX Designer
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Logo Creator
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Video Editor
-            </div>
-            <div
-              className="recommend-item active"
-              onClick={(e) => searchRecommendClick(e)}
-            >
-              Backend Web developer
-            </div>
+            {recommendDropdown.map((category, index) => {
+              return (
+                <div
+                  className="recommend-item active"
+                  onClick={(e) => searchRecommendClick(e)}
+                  key={index}
+                >
+                  {category}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -520,8 +507,8 @@ const Navbar = (props) => {
           id={index}
           onClick={() => goTo(item)}
         >
-          <div className="message">{`Many Freelancers have bidded on your work with title ${item.title}`}</div>
-          <div className="message">{item.time}</div>
+          <div className="message">{`Freelancers have bidded on your work with title ${item.title}`}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     } else if ("bid" in item) {
@@ -533,7 +520,7 @@ const Navbar = (props) => {
           onClick={() => goTo(item)}
         >
           <div className="message">{`New Bid added to your work ${item.title}`}</div>
-          <div className="message">{item.time}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     } else if ("comment" in item) {
@@ -545,7 +532,7 @@ const Navbar = (props) => {
           onClick={() => goTo(item)}
         >
           <div className="message">{`New comment added to your work ${item.title}`}</div>
-          <div className="message">{item.time}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     } else if ("comment" in item && "username" in item) {
@@ -557,7 +544,7 @@ const Navbar = (props) => {
           onClick={() => goTo(item)}
         >
           <div className="message">{`Freelancers have commentd on your work with title ${item.title}`}</div>
-          <div className="message">{item.time}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     } else if ("bidAccepted" in item && "freelancer" in item) {
@@ -569,7 +556,7 @@ const Navbar = (props) => {
           onClick={() => goTo(item)}
         >
           <div className="message">{`Your bid on work ${item.title} got accepted.`}</div>
-          <div className="message">{item.time}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     } else if ("bidAccepted" in item) {
@@ -581,7 +568,7 @@ const Navbar = (props) => {
           onClick={() => goTo(item)}
         >
           <div className="message">{`Your bid on work ${item.title} got accepted.`}</div>
-          <div className="message">{item.time}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     } else if ("offlineChatNotifications" in item) {
@@ -622,7 +609,7 @@ const Navbar = (props) => {
             <img src={item.image} alt="User" />
           </div>
           <div className="message">{item.message}</div>
-          <div className="message">{item.time}</div>
+          <div className="message-time">{item.time}</div>
         </div>
       );
     }

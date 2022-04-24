@@ -4,7 +4,6 @@ import { FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
-const server_url = process.env.REACT_APP_server_url;
 
 const colours = {
   orange: "#FFBA5A",
@@ -43,7 +42,7 @@ const FeedBack = () => {
       return;
     }
     if ("freelancer" in state) {
-      axios.post(`${server_url}/feedback`, {
+      axios.post(`http://localhost:8080/feedback`, {
         workId: state.workId,
         client: localStorage.getItem("username"),
         rating: rating,
@@ -52,7 +51,7 @@ const FeedBack = () => {
         title: state.title,
       });
     } else {
-      axios.post(`${server_url}/feedback`, {
+      axios.post(`http://localhost:8080/feedback`, {
         workId: state.workId,
         rating: rating,
         feedback: feedbackDesc,
@@ -90,10 +89,11 @@ const FeedBack = () => {
             id="feedback"
             cols="50"
             rows="10"
-            placeholder={`Enter the feedback for the ${localStorage.getItem("username") === state.client
-              ? "freelancer"
-              : "client "
-              } here:`}
+            placeholder={`Enter the feedback for the ${
+              localStorage.getItem("username") === state.client
+                ? "freelancer"
+                : "client "
+            } here:`}
             value={feedbackDesc}
             onChange={updateFeedback}
           ></textarea>

@@ -11,10 +11,7 @@ import { FullScreenLoader } from "../../components/import";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
-const server_url = process.env.REACT_APP_server_url;
-
 toast.configure();
-// console.log(server_url);
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -58,9 +55,8 @@ const UserProfile = () => {
     }
     setOtherUser(username);
     axios
-      .get(`${server_url}/userprofiledata/${username}`)
+      .get(`http://localhost:8080/userprofiledata/${username}`)
       .then((response) => {
-        console.log(response.data)
         setUserData({
           ...response.data.userProfileData,
           workPosted: response.data.workPosted,
@@ -146,7 +142,7 @@ const UserProfile = () => {
             >
               <h3>Rating </h3>
               <div className="rating">
-                {userData.rating === 0 ? "new" : userData}
+                {userData.rating === 0 ? <div className="new">new</div> : userData}
                 <i className="bx bxs-star"></i>
               </div>
             </motion.div>
@@ -168,7 +164,7 @@ const UserProfile = () => {
                     transition={{ duration: 1, ease: "linear" }}
                     className="contact-item"
                   >
-                    <i className="bx bxl-gmail"></i>
+                    <i class='bx bxl-linkedin'></i>
                     <div>{userData.linkdin}</div>
                   </motion.div>
                 )}

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ChatMain, ChatMiddle, ChatSidebar } from "../../components/import";
+import { ChatMain, ChatMiddle, ChatSidebar, FullScreenLoader } from "../../components/import";
 import "./Chat.scss";
-import LoadingSpinner from "./LoadingSpinner";
-
 import { useLocation } from "react-router";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { selectOnlineUsers } from "../../features/socket/onlineUsers";
-const server_url = process.env.REACT_APP_server_url;
 toast.configure();
 
 const Chat = () => {
@@ -37,7 +34,7 @@ const Chat = () => {
     receiver = "";
   }
   useEffect(() => {
-    let url = `${server_url}/chat/${sender}`;
+    let url = `http://localhost:8080/chat/${sender}`;
     if (receiver) {
       url += `/${receiver}`;
     }
@@ -85,7 +82,7 @@ const Chat = () => {
     }
   }, []);
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <FullScreenLoader />;
   }
   return (
     <div className="chat-container">
