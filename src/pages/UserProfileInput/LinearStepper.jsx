@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import Multiselect from "multiselect-react-dropdown";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
-const server_url = process.env.server_url;
+const server_url = process.env.REACT_APP_server_url;
 
 const skills = [
   { Skill: "HTML" },
