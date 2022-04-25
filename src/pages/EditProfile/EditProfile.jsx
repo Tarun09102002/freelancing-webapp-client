@@ -73,9 +73,9 @@ const EditProfile = () => {
 
   return (
     <>
-      <div className="base-container">
+      <div className="edit-profile-base-container">
         <Navbar />
-        <div className="container">
+        <div className="edit-profile-container">
           <div className="sidebar">
             <ul>
               {sidenNavElements.map((elem, index) => {
