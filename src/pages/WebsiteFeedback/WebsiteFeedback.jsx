@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { FullScreenLoader, Navbar } from "../../components/import";
 import "./WebsiteFeedback.scss";
-const server_url = process.env.server_url;
+const server_url = process.env.REACT_APP_server_url;
 
 toast.configure();
 
@@ -186,36 +186,36 @@ const WebsiteFeedback = () => {
           {otherFeedbacks.length === 0
             ? "No feedbacks yet..."
             : otherFeedbacks.map((elem, index) => {
-                return (
-                  <div className="each-feedback-container" key={index}>
-                    {/* <div>{elem.username}</div>
+              return (
+                <div className="each-feedback-container" key={index}>
+                  {/* <div>{elem.username}</div>
                   <img src={elem.image} alt="user"></img> */}
 
-                    <div className="votes">
-                      <div className="number">{elem.votes}</div>
-                      <div
-                        className="vote-button"
-                        onClick={() => {
-                          increaseVote(elem);
-                        }}
-                      >
-                        VOTE
-                      </div>
-                    </div>
-                    <div className="feedback-titleanddesc">
-                      <div className="feedback-title">{elem.title}</div>
-                      <span className="feedback-date">
-                        {new Date(elem.date).getDate() +
-                          "/" +
-                          (new Date(elem.date).getMonth() + 1) +
-                          "/" +
-                          new Date(elem.date).getFullYear()}
-                      </span>
-                      <div className="feedback-desc">{elem.desc}</div>
+                  <div className="votes">
+                    <div className="number">{elem.votes}</div>
+                    <div
+                      className="vote-button"
+                      onClick={() => {
+                        increaseVote(elem);
+                      }}
+                    >
+                      VOTE
                     </div>
                   </div>
-                );
-              })}
+                  <div className="feedback-titleanddesc">
+                    <div className="feedback-title">{elem.title}</div>
+                    <span className="feedback-date">
+                      {new Date(elem.date).getDate() +
+                        "/" +
+                        (new Date(elem.date).getMonth() + 1) +
+                        "/" +
+                        new Date(elem.date).getFullYear()}
+                    </span>
+                    <div className="feedback-desc">{elem.desc}</div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </>

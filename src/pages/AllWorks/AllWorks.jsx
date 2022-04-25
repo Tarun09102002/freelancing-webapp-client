@@ -9,7 +9,7 @@ import {
 import "./AllWorks.scss";
 import axios from "axios";
 // import LoadingSpinner from "../Chat/LoadingSpinner";
-const server_url = process.env.server_url;
+const server_url = process.env.REACT_APP_server_url;
 
 const AllWorks = (props) => {
   const { state } = useLocation();
@@ -44,24 +44,24 @@ const AllWorks = (props) => {
             {state.freelancingWork.length === 0
               ? "No Work Posted"
               : state.freelancingWork.map((work) => {
-                  return (
-                    <div className="work-card">
-                      <h1 className="title">
-                        <LimitCharHoverReveal word={work.title} limit="23" />
-                      </h1>
-                      <div className="desc">{work.desc}</div>
-                      <div className="btn-container">
-                        {work.username !== localStorage.getItem("username") && (
-                          <div className="btn">Chat</div>
-                        )}
-                        <div className="status progress">{work.progress}</div>
-                        {work.username !== localStorage.getItem("username") && (
-                          <div className="btn">Visit Profile</div>
-                        )}
-                      </div>
+                return (
+                  <div className="work-card">
+                    <h1 className="title">
+                      <LimitCharHoverReveal word={work.title} limit="23" />
+                    </h1>
+                    <div className="desc">{work.desc}</div>
+                    <div className="btn-container">
+                      {work.username !== localStorage.getItem("username") && (
+                        <div className="btn">Chat</div>
+                      )}
+                      <div className="status progress">{work.progress}</div>
+                      {work.username !== localStorage.getItem("username") && (
+                        <div className="btn">Visit Profile</div>
+                      )}
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

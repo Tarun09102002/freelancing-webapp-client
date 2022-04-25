@@ -11,14 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { Navigation } from "swiper";
 import axios from "axios";
 import { FullDivLoader } from "../import";
-
+const server_url = process.env.REACT_APP_server_url;
 const NormalSlider = (props) => {
   let navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
   const [items, setItems] = useState();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/${props.type}`).then(function (response) {
+    axios.get(`${server_url}/${props.type}`).then(function (response) {
       setItems(response.data.items);
       setLoading(false);
     });
