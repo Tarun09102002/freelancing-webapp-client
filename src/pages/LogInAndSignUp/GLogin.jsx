@@ -175,11 +175,10 @@ function GLogin(props) {
       position: "top-center",
     });
   };
-  console.log(process.env.client_id)
   return (
     <div className="glogin">
       <GoogleLogin
-        clientId={process.env.client_id}
+        clientId={process.env.REACT_APP_client_id}
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={"single_host_origin"}

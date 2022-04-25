@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { FullScreenLoader, Navbar } from "../../components/import";
 import "./WebsiteFeedback.scss";
-const server_url = process.env.REACT_APP_server_url;
+const server_url = process.env.server_url;
 
 toast.configure();
 
@@ -74,7 +74,7 @@ const WebsiteFeedback = () => {
     }
 
     axios
-      .post("https://freelancing-webapp-server.herokuapp.com/websitefeedback", {
+      .post("http://localhost:8080/websitefeedback", {
         data: {
           ...websiteFeedback,
           username: localStorage.getItem("username"),
@@ -114,7 +114,7 @@ const WebsiteFeedback = () => {
           !someData.votedUsers.includes(localStorage.getItem("username"))
         ) {
           voteNoted = true;
-          axios.post("https://freelancing-webapp-server.herokuapp.com/updatewebsitefeedbackvotes", {
+          axios.post("http://localhost:8080/updatewebsitefeedbackvotes", {
             title: data.title,
             desc: data.desc,
             username: localStorage.getItem("username"),
@@ -213,7 +213,21 @@ const WebsiteFeedback = () => {
                         "/" +
                         new Date(elem.date).getFullYear()}
                     </span>
-                    <div className="feedback-desc">{elem.desc}</div>
+                    <div className="votes">
+                      <div className="number">{elem.votes}</div>
+                      <div
+                        className="vote-button"
+                        onClick={() => {
+                          increaseVote(elem);
+                        }}
+                      >
+                        vote
+                      </div>
+                    </div>
+                    <div className="feedback-titleanddesc">
+                      <div className="feedback-title">{elem.title}</div>
+                      <div className="feedback-desc">{elem.desc}</div>
+                    </div>
                   </div>
                 </div>
               );

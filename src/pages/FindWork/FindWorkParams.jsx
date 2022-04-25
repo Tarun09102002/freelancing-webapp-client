@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Footer, Navbar } from "../../components/import";
+import { Footer, FullScreenLoader, Navbar } from "../../components/import";
 import "./FindWork.scss";
 import "./FindWorkParams.scss";
 import { InfoPagination } from "../../components/import";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import LoadingSpinner from "./LoadingSpinner";
 
 const FindWork = (props) => {
   let navigate = useNavigate();
@@ -33,7 +32,7 @@ const FindWork = (props) => {
   const numberOfBids = ["All", "0-10", "10-30", "30- 60", "60-100", ">100"];
   useEffect(() => {
     axios
-      .get(`https://freelancing-webapp-server.herokuapp.com/findwork/${state.category}`)
+      .get(`http://localhost:8080/findwork/${state.category}`)
       .then(function (response) {
         if (works === undefined) {
           // setworks(response.data.items);
@@ -72,7 +71,7 @@ const FindWork = (props) => {
   }, []);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <FullScreenLoader />;
   }
 
   const bid = (event, workPassed) => {

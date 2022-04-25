@@ -3,7 +3,7 @@ import { Navbar } from "../../components/import";
 import "./ClientProjectProgress.scss";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
-const server_url = process.env.REACT_APP_server_url;
+const server_url = process.env.server_url;
 
 const ClientProjectProgress = () => {
   const navigate = useNavigate();

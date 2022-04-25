@@ -168,7 +168,6 @@ const LoginSignUp = (props) => {
           localStorage.setItem("loggedIn", true);
           localStorage.setItem("isDataTaken", response.data.userDataTaken);
           const newSocket = io(`${server_url}`);
-          alert(newSocket);
           dispatch(setSocket(newSocket));
           if (response.data.chatNotifications) {
             dispatch(setNewMessage({ offlineChatNotifications: true }));
@@ -188,9 +187,6 @@ const LoginSignUp = (props) => {
             dispatch(setNewComment(commentNotifications[i]));
           }
           for (let i = 0; i < feedbackNotifications.length; i++) {
-            console.log("feedback notifications");
-            console.log("feedbackNotifications[i]");
-            console.log(feedbackNotifications[i]);
             dispatch(setFeedback(feedbackNotifications[i]));
           }
           try {
